@@ -58,7 +58,14 @@ const init=()=>{
     scene.add(camera)
 }
 
+function onWindowResize(){
 
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize( window.innerWidth, window.innerHeight );
+
+}
 const animate = ()=> {
     requestAnimationFrame(animate);
     let date = Date.now() * .0001
@@ -70,6 +77,9 @@ const animate = ()=> {
     renderer.autoClear = false;
     renderer.clear();
     renderer.render(scene, camera);
+    window.addEventListener( 'resize', onWindowResize, false );
+
+
 }
 
 init();
