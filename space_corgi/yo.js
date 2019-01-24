@@ -25,19 +25,24 @@ const talky = ()=>{
     synth.speak(utterThis);
 }
 
+const corgi_action=()=>{
+    mouse = new THREE.Vector2();
+    raycaster.setFromCamera(mouse, camera);
+    let selectedObject;
+    let intersects = raycaster.intersectObjects([mesh,mesh2], true); //array
+    if (intersects.length > 0) {
+        selectedObject = intersects[0];
+        console.log("selected",selectedObject);
+        /*if(selectedObject=="something_here"){
+            talky();
+        }
+        */
+    }
+}
+
 const onclick = (event)=> {
     talky();
-    // mouse = new THREE.Vector2();
-    // raycaster.setFromCamera(mouse, camera);
-    
-    // let intersects = raycaster.intersectObjects([mesh], true); //array
-    // if (intersects.length > 0) {
-    //     selectedObject = intersects[0];
-    //     console.log("selected",selectedObject)
-    //     if(mesh.name=="yo"){
-    //         talky();
-    //     }
-    // }
+    corgi_action();
 }
 
 const init=()=>{
@@ -48,8 +53,6 @@ const init=()=>{
     geometry = new THREE.SphereGeometry(200, 64, 64);
     material = new THREE.MeshBasicMaterial({map: image});
     material2 = new THREE.MeshBasicMaterial({map: image2});
-
-
     mesh = new THREE.Mesh(geometry.clone(),material.clone());
     mesh2 = new THREE.Mesh(geometry.clone(),material2.clone());
 
@@ -57,14 +60,11 @@ const init=()=>{
     mesh2.scale.y=.25;
     mesh2.scale.z=.25;
     mesh2.position.x=300;
-
-
    
     // loader = new THREE.TextureLoader();
     // bgTexture = loader.load("./images/space.jpg");
     // scene.background = bgTexture;
     
-
     renderer = new THREE.WebGLRenderer({antialias: true,alpha:true});
     renderer.setSize(window.innerWidth,window.innerHeight);
     document.body.appendChild(renderer.domElement);
@@ -73,13 +73,11 @@ const init=()=>{
     mouse = new THREE.Vector2();
 
     renderer.domElement.addEventListener("click", onclick, true);
-    var selectedObject;
-    
+
     orbit = new THREE.Group();
     orbitDir = new THREE.Group();
     orbitDir.rotation.x = 0.25;
    
-    
     camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,1,1000);
     camera.position.z = 500;
 
