@@ -102,6 +102,7 @@ controls.lookSpeed = 0.05;
 
 projector = new THREE.Projector();
 
+renderer.domElement.addEventListener('touchstart',(e)=>{controls.handleMouseMoveRotate( e )})
 renderer.domElement.addEventListener('mousedown',function(event){
     let vector = new THREE.Vector3(renderer.devicePixelRatio * (event.pageX - this.offsetLeft)/this.width *2 -1, -renderer.devicePixelRatio * (event.pageY - this.offsetTop)/0);
    
