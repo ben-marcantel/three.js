@@ -93,7 +93,9 @@ light.shadow.camera.bottom = -1000;
 
 
 clock = new THREE.Clock();
-controls = new THREE.FirstPersonControls( camera );
+controls = new THREE.OrbitControls( camera );
+
+//controls = new THREE.FirstPersonControls( camera );
 controls.movementSpeed = 100;
 controls.lookSpeed = 0.05;
 
